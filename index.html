@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independence Day Quiz</title>
+    <link rel="icon" type="image/x-icon" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-ai-image%2Findia-republic-day-background-wallpaper-ai-generated-image_92291105.htm&psig=AOvVaw149QXPSpYJj9sPi4XtLnj-&ust=1737907619605000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPja2MagkYsDFQAAAAAdAAAAABAR">
+<style>
+    body{
+        overflow: hidden;
+        font-family: Algerian;
+    background-color: #c4c4c4;
+  
+}
+
+.text {
+    position: absolute;
+    top: 12.5%; 
+    right: 50%;
+    transform: translate(50%,-50%);
+    text-transform: uppercase;
+    font-family: verdana;
+    font-size: 2em;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+}
+   .button {
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+   }
+    @media screen and (max-width: 2000px){
+        
+    img{
+        margin-top: 60px;
+        height: 100%;
+    }
+    h1{
+        font-size: 40px;
+    }
+    }
+    @media screen and (max-width: 800px){
+        
+        img{
+            height: 80%;
+        }
+        h1{
+            font-size: 30px;
+        }
+        }
+</style>
+</head>
+<body onload = "foo()" onload="checkplayed()" style="background-image: url('https://thumbs.dreamstime.com/b/background-indian-republic-day-independence-vector-illustration-flag-theme-97167864.jpg');background-size: cover;"><center>
+    <span class="text">Republic Day</span>
+
+<img style="width: 100%;" src="https://purepng.com/public/uploads/large/india-gxl.png" alt="">
+<button class = "button" style="margin-top:-20px;background-color: green;color:white;font-size:30px;padding: 5px;padding-left:10px;padding-right:10px;border-radius:20px;border-color: rgb(255, 247, 0);border-width:3px;" onclick="submission()">Click To Start</button>
+
+
+
+</center>
+<script>
+   
+    function submission(){
+        window.open("submission.html");
+    }
+    function foo(){
+        localStorage.getItem("Attempt");
+    }
+    function checkplayed(){
+        if(localStorage.getItem("Played")=="yes"){
+            window.open("results.html");
+            window.close();
+        };
+    }
+</script>
+</body>
+</html>

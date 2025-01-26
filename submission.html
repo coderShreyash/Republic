@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Republic Day Submission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    
+     
+   <script >
+      var firebaseConfig = {
+        apiKey: "AIzaSyApOALZ80hzi_6o7-UTuZopAdWMgKVbEcI",
+        authDomain: "medi4-45dc5.firebaseapp.com",
+        databaseURL: "https://medi4-45dc5-default-rtdb.firebaseio.com",
+        projectId: "medi4-45dc5",
+        storageBucket: "medi4-45dc5.appspot.com",
+        messagingSenderId: "534557575689",
+        appId: "1:534557575689:web:d183e021a6ae299d4206d8"
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+  
+     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background: url('https://thumbs.dreamstime.com/b/background-indian-republic-day-independence-vector-illustration-flag-theme-97167864.jpg') no-repeat center center/cover;
+            margin: 0;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        .card h1 {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #4299e1;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        button {
+            background-color: #ff5722;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #e64a19;
+            transform: translateY(-3px);
+        }
+        .thank-you {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #48bb78;
+            margin-bottom: 1rem;
+        }
+        .cert{
+                margin-top: 10px;
+            }
+        @media (max-width: 600px) {
+            .card {
+                padding: 1rem;
+                max-width: 90%;
+            }
+            .card h1 {
+                font-size: 1.5rem;
+            }
+            button {
+                font-size: 1.2rem;
+                padding: 0.5rem;
+            }
+            .cert{
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body onload="localStorage.setItem('shared','')">
+    <div class="card">
+        <h1>आपको भारतीय होने पर गर्व क्यों है?</h1> 
+
+        <h2>Why Are You Proud to Be Indian?</h2>
+        <form id="submissionForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="reason">Your Reason</label>
+                <textarea id="reason" name="reason" placeholder="Share your reason for being a proud Indian...10 to 50 words" rows="5" required></textarea>
+            </div>
+            <button type="submit">Get Certificate</button>
+        </form>
+        <div id="thankYouMessage" style="display: none;">
+            <p class="thank-you">Thank you for your submission!</p>
+            <p>You're one step closer to receiving your Republic Day certificate.</p>
+            <button id="whatsapp">Share to 5 Whatsapp chats</button>
+            <button class="cert" id="claimCertificateButton">Claim Your Certificate</button>
+        </div>
+    </div>
+  <script>      
+          var database=firebase.database();
+    users=0;
+    
+    database.ref("/Users/users").on('value',function(data){users=data.val()})
+
+
+
+
+
+        const form = document.getElementById('submissionForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const claimCertificateButton = document.getElementById('claimCertificateButton');
+        const whatsapp = document.getElementById('whatsapp');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            form.style.display = 'none';
+            thankYouMessage.style.display = 'block';
+            name = document.getElementById('name').value
+            reason = document.getElementById('reason').value
+
+            localStorage.setItem("name",name)
+            localStorage.setItem("reason",reason)
+
+            
+        database.ref("/Users/users").on('value',function(data){users=data.val()})
+
+    users++
+   database.ref("/Users/").set({
+users:users
+   })
+updater()
+        });
+
+        function goToCertificate()
+        {
+            window.open("certificate.html")
+        }
+       
+        
+        claimCertificateButton.addEventListener('click', function () {
+            // alert('Certificate claimed!'); // This would be replaced with actual certificate generation logic.
+            if(localStorage.getItem("shared")=="yes")
+        {
+            goToCertificate()
+        }
+        else{
+            alert('Share To 5 whatsapp groups to claim your certificate')
+            share()
+        }
+
+        });
+        
+        whatsapp.addEventListener('click', function () {
+         //   alert('Certificate claimed!'); // This would be replaced with actual certificate generation logic.
+         share()
+        });
+        function share(){
+
+      window.open("whatsapp://send?text=Check out this amazing website and get your Special Certificate, Now ! "+window.location.href.replace("submission","index"));
+      localStorage.setItem("shared","yes")
+  
+    }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
