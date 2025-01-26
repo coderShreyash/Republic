@@ -38,6 +38,30 @@
   <img src="" id="img" >
   </center>
   <br>
+  <script src="hyperes.js"></script>
+    <script src="confetti.js"></script>
+    <!-- Confetti  JS-->
+    <script>
+
+        // start
+
+        const start = () => {
+            setTimeout(function() {
+                confetti.start()
+            }, 500); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+        };
+
+        //  Stop
+
+        const stop = () => {
+            setTimeout(function() {
+                confetti.stop()
+            }, 6000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+        };
+
+        start();
+        stop();
+    </script>
 <script>
   var bdis = document.getElementById("dis")
   var bdown = document.getElementById("down")
@@ -84,6 +108,7 @@ imga.src=my.toDataURL();
   function sharem(){
       window.open("whatsapp://send?text=Check out this amazing website and get your Special Certificate, Now ! "+window.location.href.replace("certificate","index"));
   }
+
   </script>
 </body>
 </html>
